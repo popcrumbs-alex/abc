@@ -6,6 +6,8 @@ import Hero from "../components/landing/hero/hero";
 import Steps from "../components/landing/steps/Steps";
 import About from "../components/landing/about/About";
 import Grid from "../components/landing/about/Grid";
+import FormContainer from "../components/landing/form/FormContainer";
+import Testimonials from "../components/landing/testimonials/Testimonials";
 
 const PageContainer = styled.main`
   display: flex;
@@ -21,6 +23,8 @@ const Landing = () => {
       <Steps />
       <About />
       <Grid />
+      <FormContainer />
+      <Testimonials />
     </PageContainer>
   );
 };
