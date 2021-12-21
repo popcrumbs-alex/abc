@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Nav from "../components/landing/nav/Nav";
 import Hero from "../components/landing/hero/hero";
@@ -8,6 +6,9 @@ import About from "../components/landing/about/About";
 import Grid from "../components/landing/about/Grid";
 import FormContainer from "../components/landing/form/FormContainer";
 import Testimonials from "../components/landing/testimonials/Testimonials";
+import Programs from "../components/landing/programs/Programs";
+import { FC } from "react";
+import Footer from "../components/landing/footer/Footer";
 
 const PageContainer = styled.main`
   display: flex;
@@ -15,7 +16,7 @@ const PageContainer = styled.main`
   width: 100%;
 `;
 
-const Landing = () => {
+const Landing: FC = () => {
   return (
     <PageContainer>
       <Nav />
@@ -25,6 +26,8 @@ const Landing = () => {
       <Grid />
       <FormContainer />
       <Testimonials />
+      <Programs />
+      <Footer />
     </PageContainer>
   );
 };

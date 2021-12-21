@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
+import { useContext, useMemo } from "react";
+import { scrollIntoView } from "../../../utilities/scrollIntoView";
 import styled from "styled-components";
 import { ThemeContext } from "../../../App";
+import { useInView } from "react-intersection-observer";
 
 const Section = styled.section`
   padding: 2rem 0;
@@ -87,39 +88,48 @@ const Button = styled.button`
     color: #fff;
   }
 `;
-
-const Steps = () => {
-  const context = useContext(ThemeContext);
-  const DATA: Array<{ title: string; text: string; bgImg: string }> = [
-    {
-      title: "Step 1:",
-      text: `
+const DATA: Array<{ title: string; text: string; bgImg: string }> = [
+  {
+    title: "Step 1:",
+    text: `
         Apply Online To See If 
         You Qualify`,
-      bgImg:
-        "https://ik.imagekit.io/usam13ogl7u/pexels-andrea-piacquadio-941572_1__mgQ6OMA3ijG.jpg?updatedAt=1639597782265",
-    },
-    {
-      title: "Step 2:",
-      text: `
+    bgImg:
+      "https://ik.imagekit.io/usam13ogl7u/pexels-andrea-piacquadio-941572_1__mgQ6OMA3ijG.jpg?updatedAt=1639597782265",
+  },
+  {
+    title: "Step 2:",
+    text: `
         If Qualified Funds are Deposited 
         Within 48 Hours To Your 
         Business Bank Account`,
-      bgImg:
-        "https://ik.imagekit.io/usam13ogl7u/andre-taissin-5OUMf1Mr5pU-unsplash_54OkRL2iR.jpg?updatedAt=1639598508199",
-    },
-    {
-      title: "Step 3:",
-      text: `
+    bgImg:
+      "https://ik.imagekit.io/usam13ogl7u/andre-taissin-5OUMf1Mr5pU-unsplash_54OkRL2iR.jpg?updatedAt=1639598508199",
+  },
+  {
+    title: "Step 3:",
+    text: `
         Use The Money 
         Immediately To Grow 
         Your Business`,
-      bgImg:
-        "https://ik.imagekit.io/usam13ogl7u/visual-stories-micheile-lZ_4nPFKcV8-unsplash_RrhESm5119W.jpg?updatedAt=1639598635123",
-    },
-  ];
+    bgImg:
+      "https://ik.imagekit.io/usam13ogl7u/visual-stories-micheile-lZ_4nPFKcV8-unsplash_RrhESm5119W.jpg?updatedAt=1639598635123",
+  },
+];
+
+const Steps = () => {
+  const context = useContext(ThemeContext);
+  const { ref, inView, entry } = useInView({
+    threshold: 0,
+  });
+
+  useMemo(() => {
+    if (inView) {
+    }
+  }, [inView]);
+
   return (
-    <Section>
+    <Section ref={ref}>
       <Content data-max-width={context.maxWidth}>
         <Tag color={context.main}>Simple and Easy Business Loans</Tag>
         <Row>
@@ -140,7 +150,12 @@ const Steps = () => {
             }
           )}
         </Row>
-        <Button color={context.accent}>Click Here To Get Started</Button>
+        <Button
+          color={context.accent}
+          onClick={() => scrollIntoView(context.formSection)}
+        >
+          Click Here To Get Started
+        </Button>
       </Content>
     </Section>
   );

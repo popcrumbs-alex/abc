@@ -1,4 +1,11 @@
-import React, { FC, useContext, useState } from "react";
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Theme, ThemeContext } from "../../../App";
@@ -128,9 +135,14 @@ interface FormParams {
 
 const FormContainer: FC = () => {
   const context = useContext<Theme>(ThemeContext);
-
+  const formRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (formRef.current) {
+      context.createFormRef(formRef.current);
+    }
+  }, [formRef.current]);
   return (
-    <Section>
+    <Section ref={formRef}>
       <BGDecoration />
       <Content data-max-width={context.maxWidth}>
         <Column>

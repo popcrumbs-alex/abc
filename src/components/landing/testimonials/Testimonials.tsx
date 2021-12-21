@@ -44,6 +44,9 @@ const Arrows = styled.div`
 `;
 
 const ArrowBtn = styled.button`
+  background: transparent;
+  border: 0;
+  font-size: 1.2rem;
   &:hover {
     cursor: pointer;
   }
@@ -114,6 +117,7 @@ const Testimonials = () => {
   const [scrollWidth, setScrollWidth] = useState<number>(0);
   const [isScrolling, setScrolling] = useState<boolean>(false);
   const container = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLElement>(null);
 
   const handleScrollLeft = () => {
     let containerObj = container.current;
@@ -181,8 +185,15 @@ const Testimonials = () => {
     }
   }, [container]);
 
+  useEffect(() => {
+    if (testimonialsRef.current) {
+      console.log("test", testimonialsRef.current);
+      context.setTestimonialsRef(testimonialsRef.current);
+    }
+  }, [testimonialsRef.current]);
+
   return (
-    <Section>
+    <Section ref={testimonialsRef}>
       <Heading color={context.main} data-max-width={context.maxWidth}>
         See what our clients say about us
       </Heading>
